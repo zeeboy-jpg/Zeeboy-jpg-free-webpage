@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Template Creator</title>
+  <style>
+    /* CSS styles for the template options */
+    .template {
+      display: inline-block;
+      width: 200px;
+      height: 200px;
+      margin: 10px;
+      border: 1px solid #ccc;
+      text-align: center;
+      cursor: pointer;
+    }
+    
+    /* Additional styling for the active template */
+    .active {
+      border-color: blue;
+    }
+  </style>
+  <script>
+    // JavaScript function to handle template selection
+    function selectTemplate(templateId) {
+      var templateElements = document.getElementsByClassName('template');
+      for (var i = 0; i < templateElements.length; i++) {
+        templateElements[i].classList.remove('active');
+      }
+      document.getElementById(templateId).classList.add('active');
+    }
+    
+    // JavaScript function to create a new page with the selected template
+    function createPage() {
+      var selectedTemplate = document.querySelector('.template.active');
+      if (!selectedTemplate) {
+        alert('Please select a template first!');
+        return;
+      }
+      var newPage = window.open('', '_blank');
+      var templateContent = selectedTemplate.innerHTML;
+      newPage.document.open();
+      newPage.document.write(templateContent);
+      newPage.document.close();
+    }
+  </script>
+</head>
+<body>
+  <h1>Template Creator</h1>
+  
+  <div>
+    <h2>Select a template:</h2>
+    <div class="template" id="template1" onclick="selectTemplate('template1')">
+      <h3>Template 1</h3>
+      <p>This is the first template.</p>
+    </div>
+    
+    <div class="template" id="template2" onclick="selectTemplate('template2')">
+      <h3>Template 2</h3>
+      <p>This is the second template.</p>
+    </div>
+    
+    <div class="template" id="template3" onclick="selectTemplate('template3')">
+      <h3>Template 3</h3>
+      <p>This is the third template.</p>
+    </div>
+  </div>
+  
+  <button onclick="createPage()">Create Page</button>
+</body>
+</html>
